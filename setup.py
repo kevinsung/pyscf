@@ -61,7 +61,7 @@ class CMakeBuildPy(build_py):
         self.announce('Configuring extensions', level=3)
         src_dir = os.path.abspath(os.path.join(__file__, '..', 'pyscf', 'lib'))
         cmd = ['cmake', f'-S{src_dir}', f'-B{self.build_temp}']
-        configure_args = os.getenv('CMAKE_CONFIGURE_ARGS')
+        configure_args = os.getenv('CMAKE_CONFIGURE_ARGS', '-DBUILD_MARCH_NATIVE=ON')
         if configure_args:
             cmd.extend(configure_args.split(' '))
         self.spawn(cmd)
